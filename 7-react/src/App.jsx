@@ -8,12 +8,24 @@ import Fragment from './6-Fragment'
 import Portal from './7-Portal'
 import Form from './8-Form'
 import AdvanceSetState from './9-AdvanceSetState'
+import CreateRef from './10-CreateRef'
+import PureComponent from './11-PureComponent'
+import HOCs from './12-HOCs/App'
+import Stateless from './13-Stateless'
+import ClassVsFunctionComponent from './14-ClassVsFunctionComponent'
+import UseState from './15-UseState'
 
 class App extends React.Component {
   render () {
     return (
       <div>
-        <AdvanceSetState />
+        <UseState />
+        {/* <ClassVsFunctionComponent /> */}
+        {/* <Stateless /> */}
+        {/* <HOCs /> */}
+        {/* <PureComponent /> */}
+        {/* <CreateRef /> */}
+        {/* <AdvanceSetState /> */}
         {/* <Form /> */}
         {/* <Portal /> */}
         {/* <Fragment /> */}
