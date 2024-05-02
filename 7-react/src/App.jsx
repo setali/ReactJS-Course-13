@@ -14,12 +14,28 @@ import HOCs from './12-HOCs/App'
 import Stateless from './13-Stateless'
 import ClassVsFunctionComponent from './14-ClassVsFunctionComponent'
 import UseState from './15-UseState'
+import UseEffect from './16-UseEffect'
+import AdvanceStateEffect from './17-AdvanceStateEffect'
+import HooksRules from './18-HooksRules'
+import CustomHook from './19-CustomHook'
+import TodosUseState from './20-TodosUseState'
+import UseReducer from './21-UseReducer'
+import TodosUseReducer from './22-TodosUseReducer'
+import UseMemo from './23-UseMemo'
 
 class App extends React.Component {
   render () {
     return (
       <div>
-        <UseState />
+        <UseMemo />
+        {/* <TodosUseReducer /> */}
+        {/* <UseReducer /> */}
+        {/* <TodosUseState /> */}
+        {/* <CustomHook /> */}
+        {/* <HooksRules /> */}
+        {/* <AdvanceStateEffect /> */}
+        {/* <UseEffect /> */}
+        {/* <UseState /> */}
         {/* <ClassVsFunctionComponent /> */}
         {/* <Stateless /> */}
         {/* <HOCs /> */}
