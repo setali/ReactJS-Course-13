@@ -22,12 +22,22 @@ import TodosUseState from './20-TodosUseState'
 import UseReducer from './21-UseReducer'
 import TodosUseReducer from './22-TodosUseReducer'
 import UseMemo from './23-UseMemo'
+import Memo from './24-Memo'
+import UseRef from './25-UseRef'
+import UseCallback from './26-UseCallback'
+import LazyMode from './27-Lazy/Main'
+import ContextApp from './28-Context/App'
 
 class App extends React.Component {
   render () {
     return (
       <div>
-        <UseMemo />
+        <ContextApp />
+        {/* <LazyMode /> */}
+        {/* <UseCallback /> */}
+        {/* <UseRef /> */}
+        {/* <Memo /> */}
+        {/* <UseMemo /> */}
         {/* <TodosUseReducer /> */}
         {/* <UseReducer /> */}
         {/* <TodosUseState /> */}
