@@ -25,3 +25,19 @@
   margin: 0.5rem;
   color: red;
 }
+
+a.active {
+  color: green;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style-type: none;
+}
+
+.form-item {
+  margin: 0.5rem;
+}

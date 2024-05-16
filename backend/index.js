@@ -30,7 +30,6 @@ app.post('/api/login', (req, res) => {
 })
 
 app.get('/api/user', (req, res) => {
-  console.log(req.headers.authorization)
   if (req.headers.authorization === token) {
     res.json(user)
   } else {
@@ -38,6 +37,26 @@ app.get('/api/user', (req, res) => {
       message: 'Forbidden Error'
     })
   }
+})
+
+const articles = [
+  { id: 1, title: 'Title 1', text: 'Text 1' },
+  { id: 2, title: 'Title 2', text: 'Text 2' },
+  { id: 3, title: 'Title 3', text: 'Text 3' },
+  { id: 4, title: 'Title 4', text: 'Text 4' },
+  { id: 5, title: 'Title 5', text: 'Text 5' },
+  { id: 6, title: 'Title 6', text: 'Text 6' }
+]
+
+app.get('/api/article', (req, res) => {
+  res.json(articles)
+})
+
+app.get('/api/article/:id', (req, res) => {
+  const { id } = req.params
+
+  const article = articles.find(el => el.id === +id)
+  res.json(article)
 })
 
 app.listen(3001, () => {

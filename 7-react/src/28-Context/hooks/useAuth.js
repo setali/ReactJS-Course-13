@@ -1,20 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import request from '../tools/request'
-import { removeToken, setToken } from '../tools/utils'
+import { removeToken, setToken, getToken } from '../tools/utils'
 
 export default function useAuth () {
   const [user, setUser] = useState({})
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
-  function login () {
+  function login (data) {
     setIsLoading(true)
     request('/api/login', {
       method: 'POST',
-      data: {
-        username: 'ali',
-        password: '123'
-      }
+      data
     })
       .then(({ data }) => {
         setToken(data.token)
@@ -24,10 +21,12 @@ export default function useAuth () {
   }
 
   function getUser () {
-    request('/api/user').then(({ data }) => {
-      setUser(data)
-      setIsLoggedIn(true)
-    })
+    request('/api/user')
+      .then(({ data }) => {
+        setUser(data)
+        setIsLoggedIn(true)
+      })
+      .finally(() => setIsLoading(false))
   }
 
   function logout () {
@@ -35,6 +34,14 @@ export default function useAuth () {
     setIsLoggedIn(false)
     removeToken()
   }
+
+  useEffect(() => {
+    if (getToken()) {
+      getUser()
+    } else {
+      setIsLoading(false)
+    }
+  }, [])
 
   return { user, isLoading, isLoggedIn, login, getUser, logout }
 }

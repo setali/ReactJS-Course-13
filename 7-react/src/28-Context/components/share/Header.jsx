@@ -1,39 +1,44 @@
 import React, { Component } from 'react'
 import ThemeContext from '../../contexts/ThemeContext'
 import UserContext from '../../contexts/UserContext'
+import { Link, useLocation } from 'react-router-dom'
 
-export default class Header extends Component {
-  render () {
-    return (
-      <UserContext.Consumer>
-        {({ user, isLoading, isLoggedIn, login, logout }) => (
-          <ThemeContext.Consumer>
-            {theme => (
-              <div className='box header' style={theme}>
-                <div>
-                  <h2>Header</h2>
-                </div>
-                <div>
-                  {isLoading ? (
-                    'Loading...'
-                  ) : isLoggedIn ? (
-                    <span>
-                      {user.name}
-                      <span onClick={logout} className='logout'>
-                        Logout
-                      </span>
-                    </span>
-                  ) : (
-                    <span onClick={login}>Login</span>
-                  )}
-                </div>
+export default function Header () {
+  const location = useLocation()
+
+  return (
+    <UserContext.Consumer>
+      {({ user, isLoading, isLoggedIn, logout }) => (
+        <ThemeContext.Consumer>
+          {theme => (
+            <div className='box header' style={theme}>
+              <div>
+                <h2>Header</h2>
               </div>
-            )}
-          </ThemeContext.Consumer>
-        )}
-      </UserContext.Consumer>
-    )
-  }
+              <div>
+                {isLoading ? (
+                  'Loading...'
+                ) : isLoggedIn ? (
+                  <span>
+                    {user.name}
+                    <span onClick={logout} className='logout'>
+                      Logout
+                    </span>
+                  </span>
+                ) : (
+                  <span>
+                    <Link to='/login' state={{ from: location.pathname }}>
+                      Login
+                    </Link>
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+        </ThemeContext.Consumer>
+      )}
+    </UserContext.Consumer>
+  )
 }
 
 function Parent () {
