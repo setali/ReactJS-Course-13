@@ -1,0 +1,23 @@
+@font-face {
+  font-family: vazir;
+  src: url(../fonts/Vazir.ttf);
+}
+
+body {
+  font-family: vazir;
+}
+
+.content {
+  background-color: white;
+  margin: 1rem;
+  padding: 1rem;
+  min-height: 100vh;
+}
+
+.header {
+  background-color: white;
+}
+
+.footer {
+  text-align: center;
+}

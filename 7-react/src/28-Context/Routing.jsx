@@ -8,6 +8,7 @@ import Home from './components/general/Home'
 import Dashboard from './components/user/Dashboard'
 import Profile from './components/user/Profile'
 import RequiredAuth from './components/utils/RequiredAuth'
+import PrivateRoute from './components/utils/PrivateRoute'
 
 export default function Routing () {
   return (
@@ -17,7 +18,12 @@ export default function Routing () {
       <Route path='/about' element={<About />} />
       <Route path='/article/*' element={<ArticleRouter />} />
       <Route path='/login' element={<Login />} />
-      <Route
+      <Route element={<PrivateRoute />}>
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+      </Route>
+
+      {/* <Route
         path='/profile'
         element={
           <RequiredAuth>
@@ -28,7 +34,7 @@ export default function Routing () {
       <Route
         path='/dashboard'
         element={<RequiredAuth component={<Dashboard />} />}
-      />
+      /> */}
       <Route path='*' element={<Page404 />} />
     </Routes>
   )

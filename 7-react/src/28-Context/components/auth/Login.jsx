@@ -8,8 +8,6 @@ export default function Login () {
 
   const location = useLocation()
 
-  console.log(location)
-
   if (isLoading) {
     return <Loading />
   }
