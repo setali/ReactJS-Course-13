@@ -1,15 +1,11 @@
-import request from '@/tools/request'
+import usePerson from '@/hooks/usePerson'
 import { Divider } from '@/ui'
-import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 export default function Detail () {
-  const [person, setPerson] = useState({})
   const { id } = useParams()
 
-  useEffect(() => {
-    request(`/users/${id}`).then(({ data }) => setPerson(data))
-  }, [id])
+  const person = usePerson(id)
 
   return (
     <div>

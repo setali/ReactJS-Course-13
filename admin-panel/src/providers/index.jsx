@@ -1,10 +1,13 @@
-import AntdProvider from './antd'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from "react-router-dom";
+import AntdProvider from "./antd";
+import ReduxProvider from "./redux";
 
-export default function Providers ({ children }) {
+export default function Providers({ children }) {
   return (
     <Router>
-      <AntdProvider>{children}</AntdProvider>
+      <AntdProvider>
+        <ReduxProvider>{children}</ReduxProvider>
+      </AntdProvider>
     </Router>
-  )
+  );
 }

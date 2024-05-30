@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import request from '@/tools/request'
 import { Divider } from '@/ui'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPost } from '@/redux/actions/post'
 
 export default function Detail () {
-  const [post, setPost] = useState({})
   const { id } = useParams()
 
+  const dispatch = useDispatch()
+  const post = useSelector(state => state.post)
+
   useEffect(() => {
-    request(`/posts/${id}`).then(({ data }) => setPost(data))
+    request(`/posts/${id}`).then(({ data }) => dispatch(setPost(data)))
   }, [id])
 
   return (

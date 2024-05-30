@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { EditOutlined, EyeOutlined } from '@ant-design/icons'
 import request from '@/tools/request'
-import { Table } from '@/ui'
+import { Divider, Table } from '@/ui'
 import Remove from './Remove'
+import { connect } from 'react-redux'
+import { setPeople, setPeopleLoading } from '@/redux/actions/person'
 
-export default function List () {
-  const [people, setPeople] = useState([])
-  const [loading, setLoading] = useState(false)
-
+function List ({ setItems, people, loading, setLoading, person }) {
   function getData () {
     setLoading(true)
     request('/users')
-      .then(({ data }) => setPeople(data))
+      .then(({ data }) => setItems(data))
       .finally(() => setLoading(false))
   }
 
@@ -38,11 +37,35 @@ export default function List () {
           <Link to={`/people/${r.id}/edit`}>
             <EditOutlined style={{ margin: '0 10px' }} />
           </Link>
-          <Remove id={r.id} getData={getData} />
+          <Remove id={r.id} />
         </>
       )
     }
   ]
 
-  return <Table data={people} columns={columns} loading={loading} />
+  return (
+    <div>
+      {person.id && (
+        <div>
+          آخرین کاربر بازدید شده:
+          {person.name}
+          <Divider />
+        </div>
+      )}
+      <Table data={people} columns={columns} loading={loading} />
+    </div>
+  )
 }
+
+const mapStateToProps = state => ({
+  people: state.people,
+  loading: state.peopleLoading,
+  person: state.person
+})
+
+const mapDispatchToProps = dispatch => ({
+  setItems: data => dispatch(setPeople(data)),
+  setLoading: loading => dispatch(setPeopleLoading(loading))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(List)
