@@ -1,30 +1,24 @@
-import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Divider, Form, Spin } from '@/ui'
 import request from '@/tools/request'
 import { GENDERS } from '@/tools/constants'
+import usePerson from '@/hooks/usePerson'
 
 const { Email, Password, Text, Select, Checkbox, Submit, DatePicker } = Form
 
 export default function Edit () {
   const { id } = useParams()
-  const [person, setPerson] = useState({})
-  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    request(`/users/${id}`).then(({ data }) => setPerson(data))
-  }, [id])
+  const { person, loading } = usePerson(id)
 
   function onFinish (values) {
-    setLoading(true)
     request
       .put(`/users/${id}`, { data: values })
       .then(() => navigate(`/people/${id}`))
-      .finally(() => setLoading(false))
   }
 
-  if (!person.id) {
+  if (loading) {
     return <Spin fullscreen />
   }
 
@@ -41,7 +35,7 @@ export default function Edit () {
         <Password label='رمزعبور' name='password' required />
         <Select name='gender' label='جنسیت' required options={GENDERS} />
         <Checkbox name='admin' label='مدیر' />
-        <Submit disabled={loading} loading={loading} />
+        <Submit />
       </Form>
     </div>
   )

@@ -1,32 +1,28 @@
-export function people (state = [], { type, payload }) {
-  switch (type) {
-    case 'PEOPLE':
-      return payload
+import { createReducer } from '@reduxjs/toolkit'
+import {
+  setPeople,
+  setPeopleLoading,
+  setPerson,
+  setPersonLoading,
+  removePerson
+} from '@/redux/actions/person'
 
-    case 'REMOVE_PERSON':
-      return state.filter(p => p.id !== payload)
+export const people = createReducer([], builder => {
+  builder
+    .addCase(setPeople, (state, { payload }) => payload)
+    .addCase(removePerson, (state, { payload }) =>
+      state.filter(p => p.id !== payload)
+    )
+})
 
-    default:
-      return state
-  }
-}
+export const peopleLoading = createReducer(false, builder => {
+  builder.addCase(setPeopleLoading, (state, { payload }) => payload)
+})
 
-export function peopleLoading (state = false, { type, payload }) {
-  switch (type) {
-    case 'PEOPLE_LOADING':
-      return payload
+export const person = createReducer({}, builder => {
+  builder.addCase(setPerson, (state, { payload }) => payload)
+})
 
-    default:
-      return state
-  }
-}
-
-export function person (state = {}, { type, payload }) {
-  switch (type) {
-    case 'PERSON':
-      return payload
-
-    default:
-      return state
-  }
-}
+export const personLoading = createReducer(false, builder => {
+  builder.addCase(setPersonLoading, (state, { payload }) => payload)
+})

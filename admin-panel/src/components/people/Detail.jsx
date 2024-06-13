@@ -1,11 +1,15 @@
-import usePerson from '@/hooks/usePerson'
-import { Divider } from '@/ui'
 import { Link, useParams } from 'react-router-dom'
+import usePerson from '@/hooks/usePerson'
+import { Divider, Spin } from '@/ui'
 
 export default function Detail () {
   const { id } = useParams()
 
-  const person = usePerson(id)
+  const { person, loading } = usePerson(id)
+
+  if (loading) {
+    return <Spin fullscreen />
+  }
 
   return (
     <div>

@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
-import request from '@/tools/request'
+import { useEffect } from 'react'
 import { Table } from '@/ui'
 import { EyeOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { setPosts } from '@/redux/actions/post'
+import { getPosts } from '@/redux/actions/post'
 
 const columns = [
   { title: 'ID', key: 'id' },
@@ -19,9 +18,9 @@ const columns = [
   }
 ]
 
-function List ({ setItems, posts }) {
+function List ({ getItems, posts }) {
   useEffect(() => {
-    request('/posts').then(({ data }) => setItems(data))
+    getItems()
   }, [])
 
   return <Table data={posts} columns={columns} loading={!posts.length} />
@@ -35,7 +34,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    setItems: data => dispatch(setPosts(data))
+    getItems: () => dispatch(getPosts())
   }
 }
 

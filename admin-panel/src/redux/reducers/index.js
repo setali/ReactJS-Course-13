@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux'
-import { people, peopleLoading, person } from './person'
+import { people, peopleLoading, person, personLoading } from './person'
 import { post, posts } from './post'
 
 export default combineReducers({
   people,
   peopleLoading,
   person,
+  personLoading,
   posts,
   post
 })

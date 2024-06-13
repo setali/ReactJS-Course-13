@@ -1,22 +1,14 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { EditOutlined, EyeOutlined } from '@ant-design/icons'
-import request from '@/tools/request'
 import { Divider, Table } from '@/ui'
 import Remove from './Remove'
 import { connect } from 'react-redux'
-import { setPeople, setPeopleLoading } from '@/redux/actions/person'
+import { getPeople } from '@/redux/actions/person'
 
-function List ({ setItems, people, loading, setLoading, person }) {
-  function getData () {
-    setLoading(true)
-    request('/users')
-      .then(({ data }) => setItems(data))
-      .finally(() => setLoading(false))
-  }
-
+function List ({ getItems, people, loading, person }) {
   useEffect(() => {
-    getData()
+    getItems()
   }, [])
 
   const columns = [
@@ -64,8 +56,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setItems: data => dispatch(setPeople(data)),
-  setLoading: loading => dispatch(setPeopleLoading(loading))
+  getItems: () => dispatch(getPeople())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(List)
