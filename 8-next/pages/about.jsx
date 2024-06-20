@@ -1,6 +1,8 @@
 import Main from '../layouts/Main'
 
 export default function About () {
+  const color = 'aqua'
+
   return (
     <Main>
       <h2>About Page</h2>
@@ -10,6 +12,15 @@ export default function About () {
         necessitatibus quo, laborum neque officia dolores unde culpa error
         dolorem non vero qui!
       </p>
+      <style jsx>{`
+        h2 {
+          color: red;
+        }
+        p {
+          color: ${color};
+          padding: 1rem;
+        }
+      `}</style>
     </Main>
   )
 }
