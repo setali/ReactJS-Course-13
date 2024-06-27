@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
-import Main from '../../layouts/Main'
+import Main from '@/layouts/Main'
 import axios from 'axios'
+import Head from 'next/head'
 
 export default function User ({ user }) {
   const { query } = useRouter()
@@ -8,6 +9,9 @@ export default function User ({ user }) {
 
   return (
     <Main>
+      <Head>
+        <title>{user.name}</title>
+      </Head>
       <h2>{user.name}</h2>
       <p>{user.email}</p>
     </Main>

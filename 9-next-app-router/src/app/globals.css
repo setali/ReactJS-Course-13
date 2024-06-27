@@ -1,0 +1,16 @@
+header,
+footer,
+aside,
+article {
+  border: 1px solid;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+article {
+  width: 100%;
+}
+
+.main {
+  display: flex;
+}

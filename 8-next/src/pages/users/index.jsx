@@ -1,10 +1,14 @@
 import Link from 'next/link'
-import Main from '../../layouts/Main'
+import Main from '@/layouts/Main'
 import axios from 'axios'
+import Head from 'next/head'
 
 export default function Users ({ users }) {
   return (
     <Main>
+      <Head>
+        <title>Users list</title>
+      </Head>
       <h2>Users list</h2>
       <ol>
         {users.map(user => (
@@ -36,6 +40,8 @@ export async function getServerSideProps () {
   //   const { data: users } = await axios(
   //     'https://jsonplaceholder.typicode.com/users'
   //   )
+
+  // throw new Error('My Error')
 
   const users = await getData()
 
